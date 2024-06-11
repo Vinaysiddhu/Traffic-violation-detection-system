@@ -1,0 +1,246 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- ===============================================-->
+  <!-- Document Title -->
+  <!-- ===============================================-->
+  <title>DashBoard</title>
+
+  <!-- ===============================================-->
+  <!-- Favicons -->
+  <!-- ===============================================-->
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/img/favicons/apple-touch-icon.png' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/img/favicons/favicon-32x32.png' %}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/img/favicons/favicon-16x16.png' %}">
+  <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/favicons/favicon.ico' %}">
+  <link rel="manifest" href="{% static 'assets/img/favicons/manifest.json' %}">
+  <meta name="msapplication-TileImage" content="assets/img/favicons/mstile-150x150.png">
+  <meta name="theme-color" content="#ffffff">
+
+  <!-- ===============================================-->
+  <!-- Stylesheets -->
+  <!-- ===============================================-->
+  <link href="{% static 'assets/css/theme.css' %}" rel="stylesheet" />
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</head>
+
+<body>
+    <!-- swal message start --> 
+
+    {% if messages %}
+    {% for message in messages %}
+    {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+    <script>swal({
+            title: "Success!",
+            text: "{{message}}",
+            icon: "success",
+            button: "OK",
+        });
+    </script>
+    
+    {% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+    <script>swal({
+            title: "Warning :)",
+            text: "{{message}}",
+            icon: "warning",
+            button: "OK",
+         
+        });
+    </script>
+    {% elif message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+    <script>swal({
+            title: "info :)",
+            text: "{{message}}",
+            icon: "info",
+            button: "OK",
+        });
+    </script>
+    {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+    <script>swal({
+            title: "error :)",
+            text: "{{message}}",
+            icon: "error",
+            button: "OK",
+        });
+    </script>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+  
+    <!-- swal message ends -->
+  <!-- ===============================================-->
+  <!-- Main Content -->
+  <!-- ===============================================-->
+  <main class="main" id="top">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 d-block"
+      data-navbar-on-scroll="data-navbar-on-scroll">
+      <div class="container"><a class="navbar-brand" href="{% url 'dashboard' %}"><img src="{% static 'assets/img/MainLogo.png' %}"
+            height="60" width="65" alt="logo" /></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+            class="navbar-toggler-icon"> </span></button>
+        <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base">
+            <li class="nav-item px-2"><a class="nav-link active" href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li class="nav-item px-2"><a class="nav-link" href="{% url 'speeddetection' %}">Speed Detection</a></li>
+            <li class="nav-item px-2"><a class="nav-link" href="{% url 'signaljumpdetection' %}">Signal Jump Detection</a></li>
+            <li class="nav-item px-2"><a class="nav-link" href="{% url 'helmetdetection' %}">Helmet Detection</a></li>
+            <li class="nav-item px-2"><a class="nav-link" href="{% url 'tripleridedetection' %}">Triple Ride Detection</a></li>
+          </ul>
+          <div class="dropdown d-none d-lg-block">
+            
+            <div class="dropdown-menu dropdown-menu-lg-end p-0 rounded" aria-labelledby="dropdownMenuButton1"
+              style="top:55px">
+              <form>
+                <input class="form-control border-200" type="search" placeholder="Search" aria-label="Search"
+                  style="background:#FDF1DF;" />
+              </form>
+            </div>
+          </div>
+          <a class="btn btn-primary order-1 order-lg-0 ms-lg-3" href="{% url 'logout' %}">Log Out</a>
+          <form class="d-flex my-3 d-block d-lg-none">
+            <input class="form-control me-2 border-200 bg-light" type="search" placeholder="Search"
+              aria-label="Search" />
+            <button class="btn btn-outline-primary" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <section class="py-xxl-10 pb-0" id="home">
+      <div class="bg-holder bg-size"
+        style="background-image:url({% static 'assets/img/gallery/hero-header-bg.png' %});background-position:top center;background-size:cover;">
+      </div>
+      <!--/.bg-holder-->
+
+      <div class="container-fluid"
+        style="background-image:url({% static 'assets/img/backlogo.png' %}); width:100%; height: 200px;">
+        <!-- Page Header Start -->
+        <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
+          <div class="container text-center py-5">
+            <h1 class="display-2 text-white mb-4 animated slideInDown">Dashboard</h1>
+          </div>
+        </div>
+    </section>
+    <br><br><br><br><br>
+    <!-- Page Header End -->
+
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-3 col-md-6 col-sm-12">
+          <a href="{% url 'speeddetection' %}" class="text-decoration-none">
+            <img src="{% static 'assets/img/oo.jpg' %}" alt="" class="img-fluid shadow-lg p-3 mb-5 bg-body rounded">
+            <h3 style="text-align: center;">Speed Detection</h3>
+          </a>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12">
+          <a href="{% url 'signaljumpdetection' %}" class="text-decoration-none">
+            <img src="{% static 'assets/img/signaljump.jpg' %}" alt="" class="img-fluid shadow-lg p-3 mb-5 bg-body rounded">
+            <h3 style="text-align: center;">Signal Jump Detection</h3>
+          </a>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12">
+          <a href="{% url 'helmetdetection' %}" class="text-decoration-none">
+            <img src="{% static 'assets/img/helmet.jpg' %}" alt="" class="img-fluid shadow-lg p-3 mb-5 bg-body rounded">
+            <h3 style="text-align: center;">Helmet Detection</h3>
+          </a>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12">
+          <a href="{% url 'tripleridedetection' %}" class="text-decoration-none">
+            <img src="{% static 'assets/img/triple.webp' %}" alt="" class="img-fluid shadow-lg p-3 mb-5 bg-body rounded">
+            <h3 style="text-align: center;">Triple Ride Detection</h3>
+          </a>
+        </div>
+      </div>
+    </div>
+    <hr>
+    </div>
+
+    <!-- ============================================-->
+    <!-- <section> begin ============================-->
+    <section class="bg-900 pb-0 pt-5">
+      <div class="container">
+        <div class="row justify-content-between py-4">
+          <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <a class="text-decoration-none" href="{% url 'dashboard' %}">
+              <img src="{% static 'assets/img/MainLogo.png' %}" height="60" width="65" alt="Error" />
+            </a>
+            <p class="text-500 my-4">Enhancing Road Safety: <br />Our Smart Traffic Solutions.</p>
+          </div>
+          <div class="col-12 col-md-6 col-lg-2 mb-3">
+            <h5 class="lh-lg fw-bold mb-4 text-light font-sans-serif">Other links</h5>
+            <ul class="list-unstyled mb-md-4 mb-lg-0">
+              <li class="lh-lg"><a class="text-500" href="#!">Home</a></li>
+              <li class="lh-lg"><a class="text-500" href="#!">Pages</a></li>
+              <li class="lh-lg"><a class="text-500" href="#!">About</a></li>
+            </ul>
+          </div>
+          <div class="col-12 col-md-6 col-lg-2 mb-3">
+            <h5 class="lh-lg fw-bold text-light mb-4 font-sans-serif">Services</h5>
+            <ul class="list-unstyled mb-md-4 mb-lg-0">
+              <li class="lh-lg"><a class="text-500" href="{% url 'speeddetection' %}">Speed Detection</a></li>
+              <li class="lh-lg"><a class="text-500" href="{% url 'signaljumpdetection' %}">Signal Jump Detection</a></li>
+              <li class="lh-lg"><a class="text-500" href="{% url 'helmetdetection' %}">Helmet Detection</a></li>
+              <li class="lh-lg"><a class="text-500" href="{% url 'tripleridedetection' %}">Triple Ride Detection</a></li>
+            </ul>
+          </div>
+          <div class="col-12 col-md-6 col-lg-2 mb-3">
+            <h5 class="lh-lg fw-bold text-light mb-4 font-sans-serif">Customer Care</h5>
+            <ul class="list-unstyled mb-md-4 mb-lg-0">
+              <li class="lh-lg"><a class="text-500" href="#!">About Us</a></li>
+              <li class="lh-lg"><a class="text-500" href="#!">Contact Us</a></li>
+              <li class="lh-lg"><a class="text-500" href="#!">Get Updates</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- end of .container-->
+    </section>
+    <!-- <section> close ============================-->
+    <!-- ============================================-->
+
+    <!-- ============================================-->
+    <!-- <section> begin ============================-->
+    <section class="py-0 bg-1000">
+      <div class="container">
+        <div class="row justify-content-md-between justify-content-evenly py-4">
+          <div class="col-12 col-md-6 text-center text-md-start">
+            <p class="fs--1 my-2 fw-bold text-200">All rights Reserved &copy;</p>
+          </div>
+          
+        </div>
+      </div>
+      <!-- end of .container-->
+    </section>
+    <!-- <section> close ============================-->
+    <!-- ============================================-->
+
+
+    <!-- /.py-xxl-10 -->
+  </main>
+  <!-- ===============================================-->
+  <!-- End of Main Content -->
+  <!-- ===============================================-->
+
+  <!-- ===============================================-->
+  <!-- JavaScripts -->
+  <!-- ===============================================-->
+  <script src="{% static 'vendors/@popperjs/popper.min.js' %}"></script>
+  <script src="{% static 'vendors/bootstrap/bootstrap.min.js' %}"></script>
+  <script src="{% static 'vendors/is/is.min.js' %}"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+  <script src="{% static 'vendors/fontawesome/all.min.js' %}"></script>
+  <script src="{% static 'assets/js/theme.js' %}"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;500;600;700;800&amp;display=swap"
+    rel="stylesheet">
+</body>
+
+</html>
